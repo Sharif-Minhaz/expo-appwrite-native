@@ -1,0 +1,5 @@
+repositories {
+    mavenCentral()
+}
+
+implementation("io.appwrite:sdk-for-android:4.0.1")
