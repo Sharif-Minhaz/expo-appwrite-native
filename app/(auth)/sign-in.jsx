@@ -6,7 +6,7 @@ import FormField from "../../components/FormField";
 import CustomButton from "../../components/CustomButton";
 import { useState } from "react";
 import { Link, router } from "expo-router";
-import { signIn } from "../../lib/appwrite";
+import { getCurrentUser, signIn } from "../../lib/appwrite";
 import { useGlobalContext } from "../../context/GlobalProvider";
 
 const SignIn = () => {
@@ -28,6 +28,8 @@ const SignIn = () => {
 
 		try {
 			await signIn(form.email, form.password);
+
+			const result = await getCurrentUser();
 
 			setUser(result);
 			setIsLogged(true);

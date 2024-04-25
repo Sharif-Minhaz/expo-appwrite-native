@@ -9,10 +9,13 @@ import { useState } from "react";
 import useAppwrite from "./../../hooks/useAppwrite";
 import { getAllPosts, getLatestPosts } from "../../lib/appwrite";
 import VideoCard from "../../components/VideoCard";
+import { useGlobalContext } from "../../context/GlobalProvider";
 
 const Home = () => {
+	const { user } = useGlobalContext();
+
 	const [refreshing, setRefreshing] = useState(false);
-	const { data: posts, loading, refetch } = useAppwrite(getAllPosts);
+	const { data: posts, refetch } = useAppwrite(getAllPosts);
 	const { data: latestPosts } = useAppwrite(getLatestPosts);
 
 	const onRefreshing = async () => {
@@ -40,10 +43,10 @@ const Home = () => {
 						<View className="flex justify-between items-start flex-row mb-6">
 							<View>
 								<Text className="font-pmedium text-sm text-gray-100">
-									Welcome Back
+									Welcome back,
 								</Text>
 								<Text className="text-2xl font-psemibold text-white">
-									JSMastery
+									{user?.username}
 								</Text>
 							</View>
 
